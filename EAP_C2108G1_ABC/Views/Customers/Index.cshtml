@@ -1,0 +1,81 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<EAP_C2108G1_ABC.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                FullName
+            </th>
+            <th>
+                Birthday
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                ConfirmPassword
+            </th>
+            <th>
+                ClassEntity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <td>
+                @item.FullName
+        </td>
+        <td>
+                @item.Birthday
+        </td>
+        <td>
+                @item.Address
+        </td>
+        <td>
+                @item.Email
+        </td>
+        <td>
+                @item.UserName
+        </td>
+        <td>
+                @item.Password
+        </td>
+        <td>
+                @item.ConfirmPassword
+        </td>
+        <td>
+                @item.ClassEntity.ClassName
+        </td>
+
+        <tr>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page=>Url.Action("Index",new{page}))
